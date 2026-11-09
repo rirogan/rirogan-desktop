@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>..\assets\rirogan.ico</ApplicationIcon>
+    <AssemblyName>Rirogan.Desktop</AssemblyName>
+    <RootNamespace>RiroganDesktop</RootNamespace>
+    <Version>1.6.6</Version>
+    <SelfContained>true</SelfContained>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\shared\ReleaseChannel.cs" Link="ReleaseChannel.cs" />
+    <EmbeddedResource Include="desktop-events.js" LogicalName="RiroganDesktop.desktop-events.js" />
+    <EmbeddedResource Include="desktop-game-presence.js" LogicalName="RiroganDesktop.desktop-game-presence.js" />
+  </ItemGroup>
+  <Target Name="RemoveUnusedWebView2WpfReference" BeforeTargets="ResolveAssemblyReferences" Condition="'$(UseWPF)' != 'true'">
+    <ItemGroup>
+      <Reference Remove="@(Reference->WithMetadataValue('Filename', 'Microsoft.Web.WebView2.Wpf'))" />
+    </ItemGroup>
+  </Target>
+</Project>

@@ -1,0 +1,13 @@
+**/bin/
+**/obj/
+/dist/
+.vs/
+*.user
+*.suo
+.env
+.env.*
+*.pfx
+*.p12
+*.pem
+*.key
+*.snk
